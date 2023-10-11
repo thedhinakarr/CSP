@@ -3,7 +3,7 @@ import { Configuration, OpenAIApi } from "openai";
 import SpotifyWebApi from 'spotify-web-api-node';
 import mongoose from "mongoose";
 
-const dbConnect = async () =>{
+const dbConnect = async () => {
     try {
         await mongoose.connect("mongodb+srv://thedhinakarr:Dhinakar1%40@cluster0.zdl2lue.mongodb.net/csp");
         console.log("CONNECTED TO DB");
@@ -17,36 +17,37 @@ const dbConnect = async () =>{
 
 let cspSchema = new mongoose.Schema({
 
-    query:{
-        type:String,
-        required:true
+    query: {
+        type: String,
+        required: true
     },
 
-    response:{
-        type:String,
-        required:true
+    response: {
+        type: String,
+        required: true
     }
 
 })
 
-let csp = mongoose.model("cspModel",cspSchema);
+let csp = mongoose.model("cspModel", cspSchema);
 
 let app = express();
 let port = 6003;
 
 const configuration = new Configuration({
 
-    organization: "org-wNiSNOFSvKVFi9vX1nOtvz8x",
-    apiKey: "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",
-});
+    organization: "org-XgG9u1AG5jwcN3iY0f7VLKiH",
+    apiKey: "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",
+
+})
 
 app.use(express.json());
 
 app.post("/search", async (req, res) => {
     try {
-        
+
         console.log(req.body);
-        
+
         const openai = new OpenAIApi(configuration);
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -68,11 +69,11 @@ app.post("/search", async (req, res) => {
         //     response: x
         // })
 
-    //    await ix.save();
+        //    await ix.save();
 
         console.log("DETAILS:----------------------------------\n")
 
-        const token = "BQCpzrYw7I-j-x1RCXFvu02Dl5wtrg-4KRpL-E04unrswa6hX5-k9uQJDhPee5_B5XiWSrqJHNv4SK8LIoFsHxLZ5l9JBRafNt9ZnMmL11UE_rwurqXANjEvEqmnU6mMumJFWkqRDPnF4uewWVk2EiwVITk7Od0JiTyp5ez14_X3ucU0fne-UZlJgavYE8ZsJW1USInmmFS2zJBaTyeDMXwiE2z__1wCVmlEJOceM8_iZjcjNSWvez_YutvhvMBwFm4gPaMsiCfAG1ggO9BCveNGT9rrGks-TgemcJcCNuoWqqU2ywaLR0UNgp0pyw6CIGJm4iKHdPppSc4NNG_ombIYYQ";
+        const token = "BQC8h9PjQ_VJM-xWgBF0UgE1w4tBpCcp7BcZ078dFt6aHszACteuItqiarZXP5CHnEuZe4o8xXhxB_sNKwQikYlSQRpn9pXVd8-LrNMkEaIPtVN8w39Eclh9kL1zi8EGgKepP5dakYzVJeIdQPYDvFy4GQEf6D0WS5n_YhEl2ygUSzxg2mT5hFZwNyuSRdOB-xU4lbRtLSLgiwnZUWw9iWzJ0_4zoZHpPdo7VjNyqyOHJyGCOsuTtMFjFn3_I3-FcXz2OfoW0CbtVHppbv3coXSTE8KmbIZpNyfJLXh4knKK2D6W9w-erWCHf4qfGcYojvunMpUCx7rlKRJ9Aoue3oJhyA";
         const spotifyApi = new SpotifyWebApi();
         spotifyApi.setAccessToken(token);
 
@@ -80,13 +81,13 @@ app.post("/search", async (req, res) => {
 
             const sdata = await spotifyApi.searchTracks(data);
             let ix = sdata.body.tracks.items.map((ele) => {
-              return (ele.uri);
+                return (ele.uri);
             })
 
             console.log(ix)
-            res.status(200).json({"accessToken":token,"queryResult" : x,"result":ix})
-          }
-        
+            res.status(200).json({ "accessToken": token, "queryResult": x, "result": ix })
+        }
+
         searchSong(x);
 
     } catch (error) {

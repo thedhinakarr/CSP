@@ -12,6 +12,7 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
+
 const response = await openai.createCompletion({
   model: "text-davinci-003",
   prompt: query,
@@ -27,7 +28,7 @@ let x = response.data.choices[0].text;
 console.log(x);
 console.log("DETAILS:----------------------------------\n")
 
-const token = "BQCwdu8t1AMokKcYDNiSaByCMAPvkMAWG4nQBZRj8QJx_lexoK7lKZ_Rq6T233R_rmWoXtDBqkx9LGlXFGqw0NQBeBhQWo0jydHJ4B0wWKvEg_64WhVA58c1A_ZS81kgeRpw_e6xQt1BOTZC4lHkuvXRDM0jTPNn9rAHKPcqHodViAuBus2v7ujDc5s9BDzhcuGq9z9KHl-twfkBj4QHX75nMvWWkxnPOUEVrH6xALAVeYn77P86X4lS-WXsj2MRcvFgo161BlbECe6tnCoRMH-n-NaXFF0Wdfzz2cF5VlSoA-Q240Z-V3RUMBHfoYA3iSPa1wgr1rkEiEIV7ILMS6QarQ"
+const token = "BQC8h9PjQ_VJM-xWgBF0UgE1w4tBpCcp7BcZ078dFt6aHszACteuItqiarZXP5CHnEuZe4o8xXhxB_sNKwQikYlSQRpn9pXVd8-LrNMkEaIPtVN8w39Eclh9kL1zi8EGgKepP5dakYzVJeIdQPYDvFy4GQEf6D0WS5n_YhEl2ygUSzxg2mT5hFZwNyuSRdOB-xU4lbRtLSLgiwnZUWw9iWzJ0_4zoZHpPdo7VjNyqyOHJyGCOsuTtMFjFn3_I3-FcXz2OfoW0CbtVHppbv3coXSTE8KmbIZpNyfJLXh4knKK2D6W9w-erWCHf4qfGcYojvunMpUCx7rlKRJ9Aoue3oJhyA"
 
 spotifyApi.setAccessToken(token);
 
