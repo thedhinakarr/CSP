@@ -7,7 +7,7 @@ export default function Player({accessToken,trackUri}) {
     return ele;
   })
 
-  console.log(x)
+  console.log(x);
 
   if(!accessToken) return null
 

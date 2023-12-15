@@ -9,7 +9,7 @@ export default function PlayerPage() {
         query: ""
     });
     const [url, setUrl] = useState([]);
-    const [accessToken, setAccessToken] = useState("")
+    const [accessToken, setAccessToken] = useState("");
     const ref = createRef(null)
 
     const [image, takeScreenshot] = useScreenshot()
@@ -34,7 +34,6 @@ export default function PlayerPage() {
             console.log(data.accessToken);
             let x = data.accessToken
             console.log(x);
-            setAccessToken("BQCEZeHmgdh08rJ_0ARlnoDjofWeuBxOushrxtdRksKmmMtEJrl31vVd3YrtrDU3hJu4zIUKlJJ73qBbWU0LQ6So8kHn9q6WcJhHMExns0YWoZPntT5yO9td9daX3BqXul0KBtr1Te64Z10sXG3CQCISShpcJEAIz2qeuyKmHojqSrN7AX3otaz-Mc9m-jvKMrFujYAMtpFuteVdoypzs4NJCkPeo7u0oCHfRMxopjGQ_xGMd95RkTniNp4oEv03Z3mpvhD6maMd82loC9147TSj9j73D9jdwq0uE1brYDLmnH71kNs6PO3cjMU9qhW4ndtP2GRwJror2n2ZOw14pU-vxg");
             setUrl(data.result);
             console.log(data.result)
         } catch (error) {
@@ -51,10 +50,13 @@ export default function PlayerPage() {
                         <input type="text" placeholder="Ex: I feel < FEELING >, recommend me a <LANGUAGE/GENRE/Artist> song" name="query" onChange={onChangeHandler} className="placeholder- w-full rounded-tl-lg rounded-bl-lg bg-white p-2 text-base font-semibold outline-0" id="" />
                         <button type="submit" name="submit" onClick={onSubmitHandler} className="bg-green-500 p-3 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-green-800 transition-colors">Search</button>
                     </form>
-                    <Player accessToken={accessToken} trackUri={url} />
+                    
+                    <Player accessToken="BQCphizMrK_KMXm5rvQk3Hdc9jXAFHnmf4j5lvqLoE_J5q6NZOsMf5wK3z9cUWfPIbtiPaxQ23Yn5KZZ4XdsQ-itw7nxQNvkW2hy_bNQNen-e4h7AAA4r4N" trackUri={url} />
+
+                    
                     <button className='bg-green-500 p-3 mt-3 rounded-lg text-white font-semibold hover:bg-green-800 transition-colors'>Go back Home</button>
                     <button className='bg-green-500 p-3 mt-3 rounded-lg text-white font-semibold hover:bg-green-800 transition-colors' onClick={getImage}>
-                        Take screenshot
+                        Take screenshot:
                     </button>
                 </div>
                 <img width={400} src={image} alt={'Screenshot'} />

@@ -36,8 +36,8 @@ let port = 6003;
 
 const configuration = new Configuration({
 
-    organization: "org-XgG9u1AG5jwcN3iY0f7VLKiH",
-    apiKey: "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",
+    organization: "org-QjO3P2GedlHtE4zAuNJthG7u",
+    apiKey: "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",
 
 })
 
@@ -73,7 +73,8 @@ app.post("/search", async (req, res) => {
 
         console.log("DETAILS:----------------------------------\n")
 
-        const token = "BQC8h9PjQ_VJM-xWgBF0UgE1w4tBpCcp7BcZ078dFt6aHszACteuItqiarZXP5CHnEuZe4o8xXhxB_sNKwQikYlSQRpn9pXVd8-LrNMkEaIPtVN8w39Eclh9kL1zi8EGgKepP5dakYzVJeIdQPYDvFy4GQEf6D0WS5n_YhEl2ygUSzxg2mT5hFZwNyuSRdOB-xU4lbRtLSLgiwnZUWw9iWzJ0_4zoZHpPdo7VjNyqyOHJyGCOsuTtMFjFn3_I3-FcXz2OfoW0CbtVHppbv3coXSTE8KmbIZpNyfJLXh4knKK2D6W9w-erWCHf4qfGcYojvunMpUCx7rlKRJ9Aoue3oJhyA";
+
+        const token = "BQDbq0CPAxXj3UyGmvVAS1TpKWi8wFjIE53D6n-CRCxOLbFzebRi0ia0bIm-aNamrNavNYDN2QVJ17KK-s8k5fQ-IRLqTUogtNMnJLIX2-SMTrTjtMpmfIMK8_8hLZ_kpnO5zTMm33BFHh3exG5WymRJT1-x6u5EbMwQRgIAcxVs8Xm1QuGHwTck72TdnYbdZ3VjuwH-MvNfIvDu3zCix4cKU17o4gq9B3o2DwRg9_lMRfJCxsEjx-q22D0Xh3Q8cFOBmcjWEtkthE8YKBm2vrLgU-ZL8daKvRnw6kjmVxkyw7fjT7HlBOrQt6HZ9GBaHZPstnvIeF9jTUUGt8bzGY3J";
         const spotifyApi = new SpotifyWebApi();
         spotifyApi.setAccessToken(token);
 
