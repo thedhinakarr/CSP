@@ -1,14 +1,45 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+import { useState } from "react";
+import { useNavigate, link } from 'react-router-dom'
 
-const AUTH_URL =
-  "https://accounts.spotify.com/authorize?client_id=aac240d4bf1a4be3a913e3dd9575361c&response_type=code&redirect_uri=http://localhost:8888/callbackk&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
 
 export default function Login() {
+
+  const [accessToken, setAccessToken] = useState("");
+  
+
+  const onSubmitHandler = async (e) => {
+    try {
+      e.preventDefault();
+   
+      let { data } = await axios.get("/login");
+      console.log(data.accessToken);
+      let x = data.accessToken
+      console.log(x);
+      setAccessToken();
+  
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const openInNewWindow = (e) => {
+    e.preventDefault();
+    window.open('http://localhost:8888/login', '_blank');
+  };
+
+
   return (
     <div>
-         <a className="border border-white p-6" href={AUTH_URL}>
+      {/* <button className="border text-white border-white" onClick={openInNewWindow}>
+        Login With Spotify
+      </button> */}
+
+      <a className="border text-white border-white p-6 mt-1" href='http://localhost:8888/login' >
         Login With Spotify
       </a>
+
     </div>
   )
 }

@@ -27,7 +27,7 @@ let cspSchema = new mongoose.Schema({
         required: true
     }
 
-})
+});
 
 let csp = mongoose.model("cspModel", cspSchema);
 
@@ -36,8 +36,8 @@ let port = 6003;
 
 const configuration = new Configuration({
 
-    organization: "org-QjO3P2GedlHtE4zAuNJthG7u",
-    apiKey: "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",
+    organization: "org-TylSzhOTzrZJt9k69aXFeZr7",
+    apiKey: "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",
 
 })
 
@@ -49,17 +49,24 @@ app.post("/search", async (req, res) => {
         console.log(req.body);
 
         const openai = new OpenAIApi(configuration);
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: req.body.query,
-            temperature: 0.6,
-            max_tokens: 150,
-            top_p: 1,
-            frequency_penalty: 1,
-            presence_penalty: 1,
+
+        const completion = await openai.createCompletion({
+            model: 'gpt-3.5-turbo-instruct',
+            prompt: req.body.query+ ". Just give me one song with no description."
         });
 
-        let x = response.data.choices[0].text;
+        // const response = await openai.createCompletion({
+        //     model: "text-davinci-003",
+        //     prompt: req.body.query,
+        //     temperature: 0.6,
+        //     max_tokens: 150,
+        //     top_p: 1,
+        //     frequency_penalty: 1,
+        //     presence_penalty: 1,
+        // });
+
+        let x = completion.data.choices[0].text;
+        x = x.split('\n').join('')
         console.log(x);
 
         // Save Query, Result in database.
@@ -72,24 +79,30 @@ app.post("/search", async (req, res) => {
         //    await ix.save();
 
         console.log("DETAILS:----------------------------------\n")
-
-
-        const token = "BQDbq0CPAxXj3UyGmvVAS1TpKWi8wFjIE53D6n-CRCxOLbFzebRi0ia0bIm-aNamrNavNYDN2QVJ17KK-s8k5fQ-IRLqTUogtNMnJLIX2-SMTrTjtMpmfIMK8_8hLZ_kpnO5zTMm33BFHh3exG5WymRJT1-x6u5EbMwQRgIAcxVs8Xm1QuGHwTck72TdnYbdZ3VjuwH-MvNfIvDu3zCix4cKU17o4gq9B3o2DwRg9_lMRfJCxsEjx-q22D0Xh3Q8cFOBmcjWEtkthE8YKBm2vrLgU-ZL8daKvRnw6kjmVxkyw7fjT7HlBOrQt6HZ9GBaHZPstnvIeF9jTUUGt8bzGY3J";
         const spotifyApi = new SpotifyWebApi();
+        
+        const token = spotifyApi.getAccessToken();
+
+        console.log(token);
+
         spotifyApi.setAccessToken(token);
 
         async function searchSong(data) {
 
             const sdata = await spotifyApi.searchTracks(data);
+
             let ix = sdata.body.tracks.items.map((ele) => {
                 return (ele.uri);
             })
 
-            console.log(ix)
+            console.log(ix);
+
             res.status(200).json({ "accessToken": token, "queryResult": x, "result": ix })
         }
 
         searchSong(x);
+
+       // res.status(200).json({ "queryResult": x })
 
     } catch (error) {
         console.log(error);

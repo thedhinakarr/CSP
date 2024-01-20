@@ -21,4 +21,5 @@ async function searchSong(data){
         console.log(ele.name);
     })
 }
+
 searchSong("humble kendrick lamar")
