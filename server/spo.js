@@ -5,7 +5,7 @@ import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
 
   organization: "org-TylSzhOTzrZJt9k69aXFeZr7",
-  apiKey: "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",
+  apiKey: "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",
 
 })
 
@@ -32,7 +32,7 @@ const scopes = [
 ];
 
 const spotifyApi = new SpotifyWebApi({
-  redirectUri: 'http://localhost:8888/callback',
+  redirectUri: 'http://192.168.0.166:8888/callback',
   clientId: "7bd2c40801d0462f9db5093b3dddcab5",
   clientSecret: "271ffc63fe4442d89ba59d3ae50d9fcb"
 });
@@ -79,7 +79,7 @@ app.get('/callback', (req, res) => {
       );
 
       //Change the following redirection to the player page on successful login.
-      res.status(200).redirect("http://localhost:3000/player");
+      res.status(200).redirect("http://192.168.0.166:3000/player");
 
       setInterval(async () => {
 
